@@ -24,6 +24,7 @@ namespace :spec do
   task :install do
     puts `bundle install --gemfile=gemfiles/Gemfile.rails3_0`
     puts `bundle install --gemfile=gemfiles/Gemfile.rails3_1`
+    puts `bundle install --gemfile=gemfiles/Gemfile.rails3_2`
   end
 
   task :rails3_0 do
@@ -36,8 +37,14 @@ namespace :spec do
     Rake::Task["spec"].execute
   end
 
+  task :rails3_2 do
+    ENV['BUNDLE_GEMFILE'] = File.expand_path('../gemfiles/Gemfile.rails3_2', __FILE__)
+    Rake::Task["spec"].execute
+  end
+
   task :all do
     Rake::Task["spec:rails3_0"].execute
     Rake::Task["spec:rails3_1"].execute
+    Rake::Task["spec:rails3_2"].execute
   end
 end
