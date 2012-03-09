@@ -75,9 +75,9 @@ module NestedForm
     end
 
     def fields_for_nested_model(name, object, options, block)
-      output = %(<#{options[:wrapper_tag]} class="fields#{options[:wrapper_class]}">).html_safe
+      output = options[:suppress_fields] ? '' : %(<#{options[:wrapper_tag]} class="fields#{options[:wrapper_class]}">).html_safe
       output << super
-      output.safe_concat("</#{options[:wrapper_tag]}>")
+      output.safe_concat("</#{options[:wrapper_tag]}>") if not options[:suppress_fields]
       output
     end
   end
